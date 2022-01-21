@@ -3,7 +3,7 @@ const router = Router();
 
 const adminPagosController = require('../Controlles/adminPagos.controller');
 
-router.get('/hola',adminPagosController);
+router.get('/',adminPagosController.getInfoPagos);
 
 
 

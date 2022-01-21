@@ -1,3 +1,5 @@
-const hello = (req,res)=>{ res.send('Hola mundo') };
+const adminPagosController ={};
 
-module.exports = hello;
+    adminPagosController.getInfoPagos = (req,res)=>{ res.send('Hola mundo') };
+
+module.exports = adminPagosController;
