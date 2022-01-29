@@ -13,6 +13,11 @@ const PagosModel = require('../Models/pagos');
              console.error(error);
          }
     };
-    adminPagosController.inserInfoPagos = (req,res)=>{ res.send('Realiza pago') };
+    adminPagosController.insertInfoPagos = async (req,res)=>{
+        const newPago = new PagosModel(req.body);
+        await newPago.save();
+        res.send({message:"Nuevo Pago generado"});
+
+    };
 
 module.exports = adminPagosController;
