@@ -19,5 +19,15 @@ const PagosModel = require('../Models/pagos');
         res.send({message:"Nuevo Pago generado"});
 
     };
+    adminPagosController.getInfoPagoDep = async(req,res)=>{
+
+        console.log(req.params);
+        const {Id} = req.params;
+        const PagoDepto = await PagosModel.find({_id:Id});
+        const {departamento} = PagoDepto;
+        res.send({message:"Consultando Depto: "+departamento,Info:PagoDepto});
+
+    };
+
 
 module.exports = adminPagosController;
