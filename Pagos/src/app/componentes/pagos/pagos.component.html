@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h1>Formulario</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table table-striped">
+            <thead>
+                <th>
+                    Departamento
+                </th>
+                <th>
+                    Monto
+                </th>
+                <th>
+                    Inicio periodo
+                </th>
+                <th>
+                    Fin perido
+                </th>
+                <th>
+                    Realizado
+                </th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pago of pagos">
+                    <td>{{pago.departamento}}</td>
+                    <td>{{pago.monto}}</td>
+                    <td>{{pago.Inicio_Periodo}}</td>
+                    <td>{{pago.Fin_Peridoo}}</td>
+                    <td>{{pago.pagado}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
