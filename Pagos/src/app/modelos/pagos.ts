@@ -6,6 +6,7 @@ export interface Pagos{
     Fin_Peridoo:string,
     pagado:boolean,
     createdAt:string,
-    updatedAt:string
+    updatedAt:string,
+    togglebtn:string
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Pagos } from 'src/app/modelos/pagos';
 import { PagosService } from 'src/app/servicios/pagos.service';
 
@@ -9,6 +9,7 @@ import { PagosService } from 'src/app/servicios/pagos.service';
 })
 export class PagosComponent implements OnInit {
 
+  @ViewChild('togglebtn') togglebtnElement:ElementRef | undefined;
   pago:Pagos = {
     _id:'',
     departamento:0,
@@ -17,12 +18,15 @@ export class PagosComponent implements OnInit {
     Fin_Peridoo:'',
     pagado:false,
     createdAt:'',
-    updatedAt:''
+    updatedAt:'',
+    togglebtn:''
   };
+
+  togglebtn:string =''
 
   pagos =[this.pago]
 
-  constructor(public pagosService:PagosService) { }
+  constructor(public pagosService:PagosService,private render:Renderer2) { }
 
   ngOnInit(): void {
 
@@ -34,11 +38,36 @@ export class PagosComponent implements OnInit {
 
     this.pagosService.getPagos().subscribe(
       pagos => {
+        pagos.forEach((value)=>{
+
+          let inicioPeriodo = value.Inicio_Periodo;
+          let finPeriodo = value.Fin_Peridoo;
+
+          inicioPeriodo = inicioPeriodo.split('T')[0];
+          finPeriodo = finPeriodo.split('T')[0];
+
+          value.Inicio_Periodo = inicioPeriodo;
+          value.Fin_Peridoo = finPeriodo;
+
+          value.togglebtn = (value.pagado?'toggle-btn active':'toggle-btn')
+
+        });
+        console.log(pagos);
         this.pagos = pagos
-        console.log(this.pagos);
       }
     );
 
+  }
+  setPagoRealizado(){
+
+    console.log(this.togglebtnElement?.nativeElement.classList);
+    if (this.togglebtnElement?.nativeElement.classList.contains('active')) {
+      
+      this.togglebtnElement?.nativeElement.classList.remove('active');
+      
+    }else
+      this.togglebtnElement?.nativeElement.classList.add('active');
+    //this.render.addClass(this.togglebtnElement?.nativeElement,'active');
   }
 
 }

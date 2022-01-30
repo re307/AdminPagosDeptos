@@ -1,0 +1,29 @@
+.container-switch{
+    position: relative;
+    top: 50%;
+    left:50%;
+    margin-top: 20px;
+    transform: translate(-50%,-50%);
+}
+
+.toggle-btn{
+    width: 45px;
+    height: 25px;
+    background: gray;
+    border-radius: 30px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.toggle-btn>.inner-circle{
+    width: 15px;
+    height: 15px;
+    background: honeydew;
+    border-radius: 50%;
+}
+.toggle-btn.active{
+    background-color: rgba(5, 252, 157, 0.61);
+}
+.toggle-btn.active>.inner-circle{
+    margin-left: 20px;
+}
