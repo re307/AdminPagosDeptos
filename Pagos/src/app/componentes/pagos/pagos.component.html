@@ -24,9 +24,6 @@
                 <th>
                     Realizado
                 </th>
-                <th>
-                    Realizado Switch
-                </th>
             </thead>
             <tbody>
                 <tr *ngFor="let pago of pagos">
@@ -34,15 +31,8 @@
                     <td>{{pago.monto}}</td>
                     <td>{{pago.Inicio_Periodo}}</td>
                     <td>{{pago.Fin_Peridoo}}</td>
-                    <td>{{(pago.pagado?"pagod":"no pagado")}}</td>
                     <td>
-                        <div class="container">
-                            <div class="container-switch">
-                                <div #togglebtn [class]="pago.togglebtn" (click)="setPagoRealizado()">
-                                    <div class="inner-circle"></div>
-                                </div>
-                            </div>
-                        </div>
+                        <app-btn-switch [dataPadre]="pago._id"></app-btn-switch>
                     </td>
                 </tr>
             </tbody>

@@ -4,11 +4,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { PagosComponent } from './componentes/pagos/pagos.component';
+import { BtnSwitchComponent } from './componentes/btn-switch/btn-switch.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PagosComponent
+    PagosComponent,
+    BtnSwitchComponent
   ],
   imports: [
     BrowserModule,

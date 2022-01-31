@@ -7,6 +7,6 @@ export interface Pagos{
     pagado:boolean,
     createdAt:string,
     updatedAt:string,
-    togglebtn:string
-
+    togglebtn:string,
+    dataPadre:string
 }

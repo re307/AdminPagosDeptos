@@ -1,3 +1,4 @@
+import { Element } from '@angular/compiler';
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Pagos } from 'src/app/modelos/pagos';
 import { PagosService } from 'src/app/servicios/pagos.service';
@@ -19,10 +20,9 @@ export class PagosComponent implements OnInit {
     pagado:false,
     createdAt:'',
     updatedAt:'',
-    togglebtn:''
+    togglebtn:'',
+    dataPadre:''
   };
-
-  togglebtn:string =''
 
   pagos =[this.pago]
 
@@ -49,7 +49,9 @@ export class PagosComponent implements OnInit {
           value.Inicio_Periodo = inicioPeriodo;
           value.Fin_Peridoo = finPeriodo;
 
-          value.togglebtn = (value.pagado?'toggle-btn active':'toggle-btn')
+          value.togglebtn = (value.pagado?'toggle-btn active':'toggle-btn');
+
+          value.dataPadre = value._id;
 
         });
         console.log(pagos);
@@ -57,17 +59,6 @@ export class PagosComponent implements OnInit {
       }
     );
 
-  }
-  setPagoRealizado(){
-
-    console.log(this.togglebtnElement?.nativeElement.classList);
-    if (this.togglebtnElement?.nativeElement.classList.contains('active')) {
-      
-      this.togglebtnElement?.nativeElement.classList.remove('active');
-      
-    }else
-      this.togglebtnElement?.nativeElement.classList.add('active');
-    //this.render.addClass(this.togglebtnElement?.nativeElement,'active');
   }
 
 }
