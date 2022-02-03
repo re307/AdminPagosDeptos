@@ -1,7 +1,9 @@
 import { Element } from '@angular/compiler';
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Pagos } from 'src/app/modelos/pagos';
+import { Component, ElementRef, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { Pagos,Mensaje } from 'src/app/modelos/pagos';
 import { PagosService } from 'src/app/servicios/pagos.service';
+
+declare var $:any
 
 @Component({
   selector: 'app-pagos',
@@ -25,6 +27,7 @@ export class PagosComponent implements OnInit {
   };
 
   pagos =[this.pago]
+  
 
   constructor(public pagosService:PagosService,private render:Renderer2) { }
 
@@ -59,6 +62,34 @@ export class PagosComponent implements OnInit {
       }
     );
 
+  }
+
+  realizaPago(emiterData:string){
+
+    console.log(emiterData);
+
+    var dataHijo = emiterData.split(',');
+
+    var _Id = dataHijo[0];
+    var btn_switch_Id = dataHijo[1];
+    var valueInicia = (dataHijo[2]=='true');
+
+    console.log(btn_switch_Id);
+    console.log(valueInicia);
+
+    //this.pagosService.setPago().subscribe
+
+    if ($(btn_switch_Id).hasClass('active')) {
+
+      $(btn_switch_Id).removeClass('active');
+
+    }else{
+      
+      $(btn_switch_Id).addClass('active');
+      
+
+    }
+    
   }
 
 }

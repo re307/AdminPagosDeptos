@@ -10,3 +10,7 @@ export interface Pagos{
     togglebtn:string,
     dataPadre:string
 }
+
+export interface Mensaje{
+    message:string
+}

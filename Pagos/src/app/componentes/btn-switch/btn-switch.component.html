@@ -1,7 +1,10 @@
 <div class="container">
     <div class="container-switch">
-        <!-- <div #togglebtn [class]="pago.togglebtn" (click)="setPagoRealizado(pago.pagado)"> -->
-        <div #togglebtn [id]="dataPadre" class="toggle-btn" (click)="setPagoRealizado()">
+        <div 
+            [id]="Id_btnSwitch" 
+            [class]="classBtn" 
+            (click)="setPagoRealizado()"
+        >
             <div class="inner-circle"></div>
         </div>
     </div>

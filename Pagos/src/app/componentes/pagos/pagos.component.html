@@ -32,7 +32,12 @@
                     <td>{{pago.Inicio_Periodo}}</td>
                     <td>{{pago.Fin_Peridoo}}</td>
                     <td>
-                        <app-btn-switch [dataPadre]="pago._id"></app-btn-switch>
+                        <app-btn-switch 
+                            [dataPadre]="pago._id" 
+                            [classBtn]="pago.togglebtn"
+                            [valueEntrada]="pago.pagado"
+                            (swirchActivado)="realizaPago($event)"
+                        ></app-btn-switch>
                     </td>
                 </tr>
             </tbody>

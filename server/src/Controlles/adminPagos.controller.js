@@ -38,7 +38,7 @@ const PagosModel = require('../Models/pagos');
         const {body} = req;
         await PagosModel.findByIdAndUpdate(Id,body);
         
-        res.send({message:"Actualiza Pago Realizado Id: "+Id});
+        res.send({message:"success Pago Realizado Id: "+Id});
 
     };
 

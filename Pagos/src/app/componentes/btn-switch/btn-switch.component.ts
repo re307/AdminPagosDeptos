@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 declare var $:any
 
@@ -10,8 +10,10 @@ declare var $:any
 export class BtnSwitchComponent implements OnInit {
 
   @Input() dataPadre = '';
-
-  @ViewChild('togglebtn') togglebtnElement:ElementRef | undefined;
+  @Input() classBtn = '';
+  @Input() valueEntrada:any;
+  Id_btnSwitch = "btn-switch";
+  @Output() swirchActivado = new  EventEmitter<string>();
 
   classBtnToggle = '';
   IdPago ='';
@@ -19,6 +21,7 @@ export class BtnSwitchComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.Id_btnSwitch+=this.dataPadre;
   }
 
   obtenerDataPadr():void{
@@ -31,16 +34,9 @@ export class BtnSwitchComponent implements OnInit {
   }
   setPagoRealizado(){
 
-    if ($('#'+this.dataPadre).hasClass('active')) {
+    var emiterData = `${this.dataPadre},${this.Id_btnSwitch},${this.valueEntrada}`;
+    this.swirchActivado.emit(emiterData);
 
-      $('#'+this.dataPadre).removeClass('active');
-      
-    }else{
-      
-      $('#'+this.dataPadre).addClass('active');
-
-    }
-    //this.render.addClass(this.togglebtnElement?.nativeElement,'active');
   }
 
 }
