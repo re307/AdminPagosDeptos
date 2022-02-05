@@ -1,6 +1,7 @@
 const adminPagosController ={};
 
 const PagosModel = require('../Models/pagos');
+const PeriodosModel = require('../Models/Periodos');
 
     adminPagosController.getInfoPagos = async (req,res)=>{
          //res.send('Obten Pagos');
@@ -17,6 +18,25 @@ const PagosModel = require('../Models/pagos');
     adminPagosController.insertInfoPagos = async (req,res)=>{
         const newPago = new PagosModel(req.body);
         await newPago.save();
+        res.send({message:"Nuevo Pago generado"});
+
+    };
+
+    adminPagosController.getInfoPeriodos = async (req,res)=>{
+         //res.send('Obten Pagos');
+         try {
+
+            const periodos = await PeriodosModel.find();
+            res.json(periodos);
+             
+         } catch (error) {
+             console.error(error);
+         }
+    };
+
+    adminPagosController.insertInfoPeriodos = async (req,res)=>{
+        const newPeriodos = new PeriodosModel(req.body);
+        await newPeriodos.save();
         res.send({message:"Nuevo Pago generado"});
 
     };
@@ -38,7 +58,7 @@ const PagosModel = require('../Models/pagos');
         const {body} = req;
         await PagosModel.findByIdAndUpdate(Id,body);
         
-        res.send({message:"success Pago Realizado Id: "+Id});
+        res.send({message:"success"});
 
     };
 

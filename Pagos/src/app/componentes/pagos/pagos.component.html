@@ -2,7 +2,30 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
-                <h1>Formulario</h1>
+                <form #pagoForm="ngForm" (ngSubmit)="addPago(pagoForm)">
+                    <div class="form-group">
+                        <label for="departamentos">No. de Departamento:</label>
+                        <select [(ngModel)]="pagosService.pago.departamento" class="form-select" name="departamento" id="departamentos">
+                            <option value="0">Selecciona una opción</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="periodos">Periodo:</label>
+                        <select [(ngModel)]="pagosService.pago._id" class="form-select" name="periodo" id="periodos">
+                            <option value="0" selected>Selecciona una opción</option>
+                            <option *ngFor="let periodo of periodos"  [value]="periodo._id">Del {{periodo.Inicio_Periodo}} al {{periodo.Fin_Peridoo}}</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button class="btn btn-primary">
+                        Agregar
+                    </button>
+                </form>
             </div>
         </div>
     </div>

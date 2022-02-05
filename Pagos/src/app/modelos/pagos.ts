@@ -11,6 +11,17 @@ export interface Pagos{
     dataPadre:string
 }
 
+export interface Periodo{
+    
+    _id:string,
+    mes:number,
+    Inicio_Periodo:string,
+    Fin_Peridoo:string,
+    createdAt:string,
+    updatedAt:string,
+
+}
+
 export interface Mensaje{
     message:string
 }
