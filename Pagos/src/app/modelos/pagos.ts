@@ -11,6 +11,14 @@ export interface Pagos{
     dataPadre:string
 }
 
+export interface PagoEnvio{
+    departamento:number,
+    monto:number,
+    Inicio_Periodo:string,
+    Fin_Peridoo:string,
+    pagado:boolean
+}
+
 export interface Periodo{
     
     _id:string,
@@ -19,6 +27,8 @@ export interface Periodo{
     Fin_Peridoo:string,
     createdAt:string,
     updatedAt:string,
+    etiqueta:string,
+    selected:boolean
 
 }
 

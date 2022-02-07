@@ -8,6 +8,7 @@ router.post('/periodos',adminPagosController.insertInfoPeriodos);
 
 router.get('/',adminPagosController.getInfoPagos);
 router.post('/',adminPagosController.insertInfoPagos);
+router.get('/deptos/:depto',adminPagosController.getInfoPagosDep);
 router.get('/:Id',adminPagosController.getInfoPagoDep);
 router.put('/:Id',adminPagosController.updatePagoRealizado);
 

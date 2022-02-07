@@ -1,6 +1,6 @@
 import { Element } from '@angular/compiler';
 import { Component, ElementRef, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { Pagos,Periodo } from 'src/app/modelos/pagos';
+import { Pagos,Periodo,PagoEnvio } from 'src/app/modelos/pagos';
 import { PagosService } from 'src/app/servicios/pagos.service';
 import { NgForm } from '@angular/forms';
 
@@ -28,7 +28,16 @@ export class PagosComponent implements OnInit {
   };
 
   pagos =[this.pago];
-  periodos:Periodo[]|undefined;
+  periodos:Periodo[]=[];
+
+  departamentos =[
+    {_id:'17',departamento:17},
+    {_id:'18',departamento:18},
+    {_id:'19',departamento:19},
+    {_id:'20',departamento:20},
+    {_id:'117',departamento:117},
+    {_id:'118',departamento:118},
+  ]
 
   cambio:boolean = false;
 
@@ -40,7 +49,6 @@ export class PagosComponent implements OnInit {
   ngOnInit(): void {
 
      this.getPagos();
-     this.getPeriodos();
       
   }
 
@@ -75,23 +83,37 @@ export class PagosComponent implements OnInit {
     this.pagosService.getPeriodos().subscribe(
       periodos =>{
         periodos.forEach((value)=>{
-          let inicioPeriodo = value.Inicio_Periodo;
-          let finPeriodo = value.Fin_Peridoo;
-
-          inicioPeriodo = inicioPeriodo.split('T')[0];
-          finPeriodo = finPeriodo.split('T')[0];
-
-          value.Inicio_Periodo = inicioPeriodo;
-          value.Fin_Peridoo = finPeriodo;
+          value.etiqueta = `Del ${value.Inicio_Periodo.split('T')[0]} al ${value.Fin_Peridoo.split('T')[0]}`;
+          this.periodos?.push(value);
         });
-        this.periodos = periodos;
-        console.log(periodos);
+        // this.periodos = periodos;
+        console.log(this.periodos);
       }
     );
   }
 
-  addPago(form:NgForm){
-    console.log(form.value);
+  addPago(Depto:any,Periodos:any){
+    console.log(Depto.value);
+    console.log(Periodos.value);
+    Periodos.value.forEach((periodo:Periodo)=>{
+      var pago:PagoEnvio ={
+        departamento: Depto.value,
+        monto: 50.00,
+        Inicio_Periodo: periodo.Inicio_Periodo,
+        Fin_Peridoo: periodo.Fin_Peridoo,
+        pagado: false
+      }
+      console.log(pago);
+      this.pagosService.putPagosDepto(pago).subscribe(
+        pagoDepto =>{
+          console.log(pagoDepto);
+        }
+      );
+    });
+    
+    var periodosNew:Periodo[]=[];
+    this.periodos = periodosNew;
+    this.getPagos();
   }
 
   realizaPago(emiterData:string){
@@ -144,6 +166,34 @@ export class PagosComponent implements OnInit {
       }
     );
     
+  }
+  onSelect(value:string){
+    //console.log(value);
+    var periodosNew:Periodo[]=[];
+    this.periodos = periodosNew;
+    var mesList: number[] = [];
+    this.pagosService.getDeptoPagos(value).subscribe(
+      pagos =>{
+        pagos.forEach((value)=>{
+          var mes = 0;
+
+          mes = Number(value.Inicio_Periodo.split('T')[0].split('-')[1]);
+          mesList.push(mes);
+        });
+      }
+    );
+    console.log('mesList',mesList);
+    this.pagosService.getPeriodos().subscribe(
+      periodos =>{
+        periodos.forEach((value)=>{
+          value.etiqueta = `Del ${value.Inicio_Periodo.split('T')[0]} al ${value.Fin_Peridoo.split('T')[0]}`;
+          value.selected = mesList.includes(value.mes);
+          this.periodos?.push(value);
+        });
+        // this.periodos = periodos;
+        console.log(this.periodos);
+      }
+    );
   }
 
 }

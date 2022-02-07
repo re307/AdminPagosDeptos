@@ -14,6 +14,8 @@
     }
 
 ###
+    GET http://localhost:4000/adminPagos/deptos/17
+###
     GET http://localhost:4000/adminPagos/61f49a537d3ef9c7988f41c0
 ###
     PUT http://localhost:4000/adminPagos/61f49a537d3ef9c7988f41c0
@@ -22,5 +24,18 @@
     {
         "pagado":true
     }
+###
+    GET http://localhost:4000/adminPagos/periodos
+    
+###
+    POST http://localhost:4000/adminPagos/periodos
+    Content-Type: application/json
+    
+    {
+        "mes":3,
+        "Inicio_Periodo":"2022-03-01",
+        "Fin_Peridoo":"2022-03-31"
+    }
 
+###
     

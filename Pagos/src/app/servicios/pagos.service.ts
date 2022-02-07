@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable,of } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
-import { Mensaje, Pagos, Periodo } from '../modelos/pagos';
+import { 
+  Mensaje, 
+  Pagos,
+  PagoEnvio, 
+  Periodo 
+} from '../modelos/pagos';
+import { NoopAnimationPlayer } from '@angular/animations';
 
 @Injectable({
   providedIn: 'root'
@@ -39,20 +45,25 @@ export class PagosService {
     return this.httpClient.get<Pagos[]>(this.URL_API);
 
   }
+  
+
+  getDeptoPagos(depto:string):Observable<Pagos[]>{
+
+    return this.httpClient.get<Pagos[]>(`${this.URL_API}/deptos/${depto}`);
+
+  }
 
   setPago(_id:string,newValue:boolean):Observable<Mensaje>{
-
-    console.log("setPago(_id:string,newValue:boolean):Observable<Mensaje> newValue",newValue);
-
     var jsonEnvio ={
       pagado:newValue
     }
 
-    console.log(`el Id que entro: ${_id} con la bandera en: ${jsonEnvio.pagado}`);
-
-    
     return this.httpClient.put<Mensaje>(`${this.URL_API}/${_id}`,jsonEnvio);;
 
+  }
+
+  putPagosDepto(pago:PagoEnvio):Observable<Mensaje>{
+    return this.httpClient.post<Mensaje>(this.URL_API,pago);
   }
 
 }
